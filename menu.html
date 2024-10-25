@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="https://th.bing.com/th/id/OIP.WlIkNWOqCrbxP9xEDNTorQHaDq?rs=1&pid=ImgDetMain" style="height: 40px; width: 50px;" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="nuevopersonaje.html">Nuevo Personaje</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="modificarpersonaje.html">Modificar Personaje</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="seriesDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Series
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu" id="seriesList" aria-labelledby="navbarDarkDropdownMenuLink">
+
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<script>
+    let urlApi = "https://apiseriespersonajes2024.azurewebsites.net/";
+    $(document).ready(function () {
+        loadSeries();
+
+        function loadSeries() {
+            var request = "api/Series";
+            var url = urlApi + request;
+
+            $.get(url, function (data) {
+                console.log("Leyendo Series");
+                data.forEach(function (serie) {
+                    $('#seriesList').append(
+                        '<li><a class="dropdown-item" href="/serie.html?idSerie=' + serie.idSerie + '">' + serie.nombre + '</a></li>'
+                    );
+                });
+            })
+        }
+    });
+</script>
